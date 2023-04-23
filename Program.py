@@ -1,38 +1,28 @@
 from tkinter import *
+import tkinter.messagebox
+from tkinter.colorchooser import *
+from tkinter.filedialog import *
 
 root = Tk()
 root.title("My GUI") # กำหนดชื่อโปรแกรม
 
 # กำหนดขนาดหน้าจอและตำแหน่งหน้าจอ
 
-root.geometry("600x400+100+200") #กว้าง*ยาว+แกนx+แกน y
+root.geometry("600x500+100+200") #กว้าง*ยาว+แกนx+แกน y
 
-# สร้างเมนู
-myMenu = Menu()
-root.config(menu=myMenu)
+# หน้าต่างเลือกสี
+def selectColor():
+    color = askcolor()
+    myLabel = Label(text="Hello Tkinter", bg=color[1]).pack()
 
-# สร้างหน้าต่างใหม่
-def showWindow():
-    window = Tk()
-    window.title("New Window")
-    window.geometry("200x200")
-    window.mainloop()
+# หน้าต่างเลือกไฟล์
+def selectFile():
+    fileOpen = askopenfilename()
+    fileContent = open(fileOpen, encoding="utf8")
+    myLabel = Label(text=fileContent.read()).pack()
 
-# สร้างเมนูย่อย
-menuItem = Menu()
-menuItem.add_command(label="New Window", command=showWindow)
-menuItem.add_command(label="Open File")
-menuItem.add_command(label="Save File")
-menuItem.add_command(label="About")
-menuItem.add_command(label="Exit")
-
-
-# เพิ่มเมนู
-myMenu.add_cascade(label="File",menu=menuItem)
-myMenu.add_cascade(label="Edit")
-myMenu.add_cascade(label="View")
-
-
+btnColor = Button(text="Choose Color", command=selectColor).pack()
+btnFile = Button(text="Choose File", command=selectFile).pack()
 
 # # ใส่ข้อความในหน้าจอ
 
