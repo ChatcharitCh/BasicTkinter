@@ -7,31 +7,29 @@ root = Tk()
 root.title("My GUI") # กำหนดชื่อโปรแกรม
 
 # กำหนดขนาดหน้าจอและตำแหน่งหน้าจอ
-root.geometry("500x500+100+200") #กว้าง*ยาว+แกนx+แกน y
+root.geometry("500x300+100+200") #กว้าง*ยาว+แกนx+แกน y
 
-def showAnswer():
-    choice1 = language1.get()
-    choice2 = language2.get()
-    choice3 = language3.get()
-    choice4 = language4.get()
-    
-    if choice1 == 1:
-        Label(text="Choose Python").pack(anchor=W)
-    if choice2 == 1:
-        Label(text="Choose Java").pack(anchor=W)
-    if choice3 == 1:
-        Label(text="Choose PHP").pack(anchor=W)
-    if choice4 == 1:
-        Label(text="Choose C#").pack(anchor=W)
-    
-language1 = IntVar()
-Checkbutton(text="Python", variable=language1).pack(anchor=W)
-language2 = IntVar()
-Checkbutton(text="Java", variable=language2).pack(anchor=W)
-language3 = IntVar()
-Checkbutton(text="PHP", variable=language3).pack(anchor=W)
-language4 = IntVar()
-Checkbutton(text="C#", variable=language4).pack(anchor=W)
+Label(text="Radius:", font=30).grid(row=0,sticky=W)
+radius = IntVar()
+et1 = Entry(width=30, textvariable=radius, font=30)
+et1.grid(row=0,column=1)
 
-Button(text="Show Answer", command=showAnswer).pack(anchor=W)
+Label(text="Area:", font=30).grid(row=1,sticky=W)
+et2 = Entry(width=30, font=30)
+et2.grid(row=1,column=1)
+
+def calculate():
+    et2.delete(0, END)
+    r = radius.get()
+    a = 3.14 * r * r
+    et2.insert(0, a)
+
+def deleteText():
+    et1.delete(0, END)
+    et2.delete(0, END)
+
+btnCalculate = Button(text="Calculate", command=calculate).grid(row=2, column=1, sticky=W)
+btnDelete = Button(text="Delete", command=deleteText).grid(row=2, column=1, sticky=E)
+
+
 root.mainloop() # ลูปรันวนเรื่อยๆ
